@@ -1,52 +1,50 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.20"
-    id("org.jetbrains.intellij") version "1.16.0"
+    id("org.jetbrains.kotlin.jvm") version "2.3.21"
+    id("org.jetbrains.intellij.platform") version "2.18.1"
 }
 
 group = "io.github.swan-geese"
-version = "1.1-SNAPSHOT"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://maven.aliyun.com/repository/central/")}
-    maven { url = uri("https://maven.aliyun.com/repository/public/")}
-    maven { url = uri("https://maven.aliyun.com/repository/google/")}
-    maven { url = uri("https://maven.aliyun.com/repository/jcenter/")}
-    maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin/")}
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-// Configure Gradle IntelliJ Plugin
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
-intellij {
-    version.set("2023.3.1")
-    type.set("IU") // Target IDE Platform
+dependencies {
+    intellijPlatform {
+        androidStudio("2026.1.1.10")
+    }
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+    testImplementation(kotlin("test"))
 }
 
-tasks {
-    // Set the JVM compatibility versions
-    withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
-    }
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "17"
-    }
+kotlin {
+    jvmToolchain(17)
 
-    patchPluginXml {
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
+}
 
-    signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-    }
+tasks.withType<JavaCompile>().configureEach {
+    sourceCompatibility = JavaVersion.VERSION_17.toString()
+    targetCompatibility = JavaVersion.VERSION_17.toString()
+}
 
-    publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
+tasks.test {
+    useJUnitPlatform()
+}
+
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = "231"
+        }
     }
 }

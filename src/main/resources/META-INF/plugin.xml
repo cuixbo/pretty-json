@@ -8,17 +8,31 @@
     <name>Pretty JSON</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="464456947@qq.com" url="https://www.996dog.com">swan-geese</vendor>
+    <vendor url="https://github.com/cuixbo/pretty-json">cuixbo</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    This is a json formatting plugin<br>
-    <em>1. Plugin Center Download `Pretty JSON` plugin</em><br>
-    <em>2.1 Choose data -> right Click Menu `Pretty JSON`  Or Use a Shortcut Key `Command + J`</em><br>
-    <em>2.2 Choose data -> right Click Menu `Indented JSON`  Or Use a Shortcut Key `Ctrl + Command + J`</em><br>
-    <em>3. go </em><br>
+    <p>Formats or compacts selected JSON text directly in the editor.</p>
+    <p>
+      <strong>Maintained fork:</strong>
+      <a href="https://github.com/cuixbo/pretty-json">cuixbo/pretty-json</a>
+      (maintained by cuixbo), forked from the original project
+      <a href="https://github.com/swan-geese/pretty-json">swan-geese/pretty-json</a>.
+    </p>
+    <p><strong>Changes in this fork</strong></p>
+    <ul>
+      <li>Modernized the IntelliJ Platform build chain for Android Studio 2026.1.</li>
+      <li>Removed the IDE-version upper bound while retaining the 231 baseline.</li>
+      <li>Updated editor data-context access to the current IntelliJ Platform API.</li>
+    </ul>
+    <p><strong>Usage</strong></p>
+    <ul>
+      <li>Select a JSON object, then choose <em>Pretty JSON</em> to format it with four-space indentation.</li>
+      <li>Select a JSON object, then choose <em>Indented JSON</em> to compact it.</li>
+      <li>Shortcuts: <em>Ctrl + Command + J</em> for Pretty JSON and <em>Ctrl + Command + I</em> for Indented JSON.</li>
+    </ul>
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
